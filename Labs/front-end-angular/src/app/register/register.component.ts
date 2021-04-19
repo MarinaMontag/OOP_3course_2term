@@ -9,7 +9,7 @@ import {AuthService} from '../auth.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  registerUserData = new User();
+  registerUserData = new User('', '', '', '', null);
   constructor(private authService: AuthService) { }
   ngOnInit(): void {
   }
