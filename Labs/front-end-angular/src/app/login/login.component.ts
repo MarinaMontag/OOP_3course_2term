@@ -14,8 +14,15 @@ export class LoginComponent implements OnInit {
   }
   login(): void {
     this.auth.loginUser(this.loginUserData).subscribe(
-      res => console.log(res),
-      error => console.log(error)
+      res => {
+        console.log(res);
+      },
+      error => {
+        console.log(error);
+        if (error.statusText === 'Unknown Error') {
+          console.log('Unknown Error');
+        }
+      }
     );
   }
 }

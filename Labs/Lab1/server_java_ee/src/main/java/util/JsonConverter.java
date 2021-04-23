@@ -25,9 +25,6 @@ public class JsonConverter {
 
     public static <T> void makeResponse(T obj, HttpServletResponse resp) throws IOException {
         resp.setContentType("application/json");
-        resp.setHeader("Access-Control-Allow-Origin", "*");
-        resp.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-        resp.setHeader("Access-Control-Allow-Methods", "GET, PATCH, PUT, POST, DELETE, OPTIONS");
         PrintWriter writer = resp.getWriter();
         writer.write(new ObjectMapper().writeValueAsString(obj));
     }

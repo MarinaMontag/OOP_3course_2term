@@ -1,7 +1,5 @@
-import {IronEncrypt} from '../iron/iron-encrypt';
-import {Role} from './role';
 
-@IronEncrypt({dataClassPassword: ['top-secret']})
+import {Role} from './role';
 export class User{
   constructor(
     public firstName: string,

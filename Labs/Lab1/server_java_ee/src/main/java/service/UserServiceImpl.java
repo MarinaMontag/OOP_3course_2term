@@ -9,4 +9,9 @@ public class UserServiceImpl implements UserService{
     public User createUser(User user) throws ServerException, ClassNotFoundException {
         return UserDAO.addUser(user);
     }
+
+    @Override
+    public User getUser(String email, String password) throws ServerException, ClassNotFoundException {
+        return UserDAO.selectUser(email, password);
+    }
 }

@@ -5,4 +5,5 @@ import model.User;
 
 public interface UserService {
    User createUser(User user) throws ServerException, ClassNotFoundException;
+   User getUser(String email, String password) throws ServerException, ClassNotFoundException;
 }

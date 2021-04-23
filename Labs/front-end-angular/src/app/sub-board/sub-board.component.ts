@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {SubjService} from '../subj.service';
+import {Subject} from '../model/subject';
 
 @Component({
   selector: 'app-sub-board',
@@ -6,10 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./sub-board.component.css']
 })
 export class SubBoardComponent implements OnInit {
-
-  constructor() { }
+  subjects: Subject[] = [];
+  constructor(private service: SubjService) {
+  }
 
   ngOnInit(): void {
+    this.service.getSubjects().subscribe(
+      subjects => this.subjects = subjects,
+      error => console.log(error)
+    );
   }
 
 }

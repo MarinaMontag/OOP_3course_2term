@@ -8,24 +8,19 @@ import { RegisterComponent } from './register/register.component';
 import { TestListComponent } from './test-list/test-list.component';
 import { SubBoardComponent } from './sub-board/sub-board.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HttpClientModule} from '@angular/common/http';
 import {AuthService} from './auth.service';
-import {LoggingHttpInterceptor} from './logging-http.interceptor';
-import {IronHttpInterceptor} from './iron/iron-http-interceptor';
+import {SubjService} from './subj.service';
 
 const routes = [
   {path: '', redirectTo: '/subject', pathMatch: 'full'},
+  {path: 'subject', component: SubBoardComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
-  {path: 'subject', component: SubBoardComponent},
   {path: 'tests', component: TestListComponent}
 ];
 
-const interceptors = [
-  {provide: HTTP_INTERCEPTORS, useClass: LoggingHttpInterceptor, multi: true},
-  {provide: HTTP_INTERCEPTORS, useClass: IronHttpInterceptor, multi: true}
-];
 
 @NgModule({
   declarations: [
@@ -44,7 +39,7 @@ const interceptors = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [AuthService, interceptors],
+  providers: [AuthService, SubjService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

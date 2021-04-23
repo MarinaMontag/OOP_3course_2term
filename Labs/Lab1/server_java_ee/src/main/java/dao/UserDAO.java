@@ -2,19 +2,20 @@ package dao;
 
 import exception.ServerException;
 import model.User;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import util.JdbcConnection;
 
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
 public class UserDAO {
     private static final String addUserQuery =
             "INSERT INTO users VALUES (default, ?, ?, ?, ?, ?)";
+    private static final String selectUserQuery =
+            "SELECT * FROM users WHERE uemail = ? AND upassword = ?";
+
     public static User addUser(User user) throws ServerException, ClassNotFoundException {
         if(user==null)
             return null;
@@ -28,6 +29,28 @@ public class UserDAO {
             int rows = preparedStatement.executeUpdate();
             if(rows <= 0) {
                 return null;
+            }
+        }catch (SQLException e){
+            throw new ServerException("can not add new user");
+        }
+        return user;
+    }
+
+    public static User selectUser(String email, String password) throws ClassNotFoundException, ServerException {
+        if(email==null || password==null)
+            return null;
+        User user = null;
+        try(Connection conn = JdbcConnection.getConnection()){
+            PreparedStatement preparedStatement = conn.prepareStatement(selectUserQuery);
+            preparedStatement.setString(1,email);
+            preparedStatement.setString(2,password);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                user= new User(resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getString(5),
+                        resultSet.getInt(6));
             }
         }catch (SQLException e){
             throw new ServerException("can not add new user");

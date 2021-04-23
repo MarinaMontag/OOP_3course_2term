@@ -1,9 +1,6 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import util.JsonConverter;
 
 @JsonPropertyOrder({"firstName", "lastName", "email", "password", "role"})
 public class User {
@@ -13,7 +10,8 @@ public class User {
     public String password;
     public Role role;
 
-    public User(){};
+    public User() {
+    }
 
     public User(String firstName, String lastName, String email, String password, Role role) {
         this.firstName = firstName;
@@ -21,6 +19,23 @@ public class User {
         this.email = email;
         this.password = password;
         this.role = role;
+    }
+
+    public User(String firstName, String lastName, String email, String password, int role) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        if (role == 0)
+            this.role = Role.TUTOR;
+        else this.role = Role.STUDENT;
+    }
+    public User(String email, String role){
+        this.email = email;
+        if(role.equals(Role.TUTOR.toString()))
+            this.role=Role.TUTOR;
+        else
+            this.role=Role.STUDENT;
     }
 
     public String getFirstName() {
