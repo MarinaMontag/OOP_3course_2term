@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {TestService} from '../test.service';
 import {Test} from '../test';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-test-list',
@@ -10,21 +11,26 @@ import {Test} from '../test';
 })
 export class TestListComponent implements OnInit{
   tests: Test[] = [];
+  subjectId: number;
   constructor(
     private route: ActivatedRoute,
-    private testService: TestService
-  ) {}
+    private testService: TestService,
+    private location: Location
+  ) {
+    route.params.subscribe(params => { this.subjectId = params.id; });
+  }
 ngOnInit(): void {
-  this.getTests();
+    this.getTests();
 }
   getTests(): void {
-    const subjectId = Number(this.route.snapshot.paramMap.get('id'));
-    this.testService.getTests(subjectId)
+    this.testService.getTests(this.subjectId)
       .subscribe(
         tests => this.tests = tests.testList,
         error => console.log(error)
       );
   }
+
   passTest(id: number): void{
+    this.location.back();
   }
 }

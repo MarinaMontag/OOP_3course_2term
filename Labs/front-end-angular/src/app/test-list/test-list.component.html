@@ -13,10 +13,11 @@
     <td>{{test.name}}</td>
     <td>{{test.description}}</td>
     <td>
-      <a routerLink="/test/{{test.id}}"class="btn btn-success">Pass</a>
+      <a routerLink="/subject/{{subjectId}}/{{test.id}}" class="btn btn-success">Pass</a>
     </td>
   </tr>
   </tbody>
 </table>
 </div>
 <h5 *ngIf="tests.length==0">No tests</h5>
+

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({"id", "name", "description"})
 public class Test {
     private int id;
+    private int subjectId;
     private String name;
     private String description;
 
@@ -40,5 +41,4 @@ public class Test {
     public void setDescription(String description) {
         this.description = description;
     }
-
 }

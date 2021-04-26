@@ -14,10 +14,15 @@ import {SubjService} from './subj.service';
 import {TestService} from './test.service';
 import { TestComponent } from './test-list/test/test.component';
 
+const testRoute = [
+  {path: 'test/:tid', component: TestComponent}
+];
+
 const routes = [
   {path: '', redirectTo: '/subject', pathMatch: 'full'},
   {path: 'subject', component: SubBoardComponent},
   {path: 'subject/:id', component: TestListComponent},
+  {path: 'subject/:id/:tid', component: TestComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent}
