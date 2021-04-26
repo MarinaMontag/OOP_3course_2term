@@ -1,8 +1,9 @@
 package controller.servlets;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import exception.ServerException;
 import model.Subject;
-import service.SubjectService;
+import model.SubjectList;
 import service.SubjectServiceImpl;
 import util.JsonConverter;
 
@@ -12,25 +13,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
-@WebServlet("/subjects")
+
+
+@WebServlet(urlPatterns = {"/subjects"})
 public class SubjectsServlet extends HttpServlet {
-    private SubjectService subjectService;
-    SubjectsServlet(){
-        super();
-        subjectService=new SubjectServiceImpl();
-    }
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        resp.addHeader("Access-Control-Allow-Origin", "*");
+        SubjectList list;
         try {
-            List<Subject>subjects=subjectService.getSubjects();
-            if(subjects==null||subjects.size()==0)
-                resp.sendError(404,"Resource not found");
+            list = new SubjectServiceImpl().getSubjects();
+            if (list.getSubjectList() == null || list.getSubjectList().size() == 0)
+                resp.sendError(404, "Resource not found");
             else
-                JsonConverter.makeResponse(subjects, resp);
+                JsonConverter.makeResponse(list, resp);
         } catch (ServerException e) {
-            e.printStackTrace();
+            resp.sendError(404, "Resource not found");
         }
     }
 }

@@ -53,7 +53,7 @@ public class UserDAO {
                         resultSet.getInt(6));
             }
         }catch (SQLException e){
-            throw new ServerException("can not add new user");
+            throw new ServerException("can not select user");
         }
         return user;
     }

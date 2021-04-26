@@ -6,12 +6,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@WebFilter(urlPatterns = {"/*"})
 public class CORSFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
     }
-
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         servletRequest.setCharacterEncoding("UTF-8");
@@ -25,14 +24,8 @@ public class CORSFilter implements Filter {
                 "GET, OPTIONS, HEAD, PUT, POST");
         ((HttpServletResponse) servletResponse).setHeader("Access-Control-Allow-Headers", "*");
         ((HttpServletResponse) servletResponse).setHeader("Access-Control-Allow-Credentials", "true");
+        ((HttpServletResponse) servletResponse).setContentType("application/json");
         HttpServletResponse resp = (HttpServletResponse) servletResponse;
-
-        // For HTTP OPTIONS verb/method reply with ACCEPTED status code -- per CORS handshake
-//        if (request.getMethod().equals("OPTIONS")) {
-//            resp.setStatus(HttpServletResponse.SC_ACCEPTED);
-//            return;
-//        }
-
         // pass the request along the filter chain
         filterChain.doFilter(request, servletResponse);
     }

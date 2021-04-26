@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/login")
+@WebServlet(urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
     private UserService userService;
 

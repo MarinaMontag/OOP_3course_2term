@@ -14,9 +14,8 @@ export class SubBoardComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.getSubjects().subscribe(
-      subjects => this.subjects = subjects,
+      subjects => this.subjects = subjects.subjectList,
       error => console.log(error)
     );
   }
-
 }

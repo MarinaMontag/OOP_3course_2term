@@ -2,14 +2,14 @@ package service;
 
 import dao.SubjectDAO;
 import exception.ServerException;
-import model.Subject;
+import model.SubjectList;
 
 import java.util.List;
 
 public class SubjectServiceImpl implements SubjectService{
 
     @Override
-    public List<Subject> getSubjects() throws ServerException {
+    public SubjectList getSubjects() throws ServerException {
         return SubjectDAO.getAllSubjects();
     }
 }

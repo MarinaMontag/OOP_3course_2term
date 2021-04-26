@@ -2,6 +2,7 @@ package dao;
 
 import exception.ServerException;
 import model.Subject;
+import model.SubjectList;
 import util.JdbcConnection;
 
 import java.sql.Connection;
@@ -14,7 +15,7 @@ import java.util.List;
 public class SubjectDAO {
     private static final String selectAllQuery =
             "SELECT * FROM subj";
-    public static List<Subject> getAllSubjects() throws ServerException {
+    public static SubjectList getAllSubjects() throws ServerException {
         List<Subject>subjects;
         try(Connection conn = JdbcConnection.getConnection()){
             PreparedStatement preparedStatement = conn.prepareStatement(selectAllQuery);
@@ -26,6 +27,6 @@ public class SubjectDAO {
         }catch (SQLException | ClassNotFoundException e){
             throw new ServerException("can not select subjects");
         }
-        return subjects;
+        return new SubjectList(subjects);
     }
 }

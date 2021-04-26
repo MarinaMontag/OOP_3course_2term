@@ -11,14 +11,16 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import {AuthService} from './auth.service';
 import {SubjService} from './subj.service';
+import {TestService} from './test.service';
+import { TestComponent } from './test-list/test/test.component';
 
 const routes = [
   {path: '', redirectTo: '/subject', pathMatch: 'full'},
   {path: 'subject', component: SubBoardComponent},
+  {path: 'subject/:id', component: TestListComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'profile', component: ProfileComponent},
-  {path: 'tests', component: TestListComponent}
+  {path: 'profile', component: ProfileComponent}
 ];
 
 
@@ -29,7 +31,8 @@ const routes = [
     ProfileComponent,
     RegisterComponent,
     TestListComponent,
-    SubBoardComponent
+    SubBoardComponent,
+    TestComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +42,7 @@ const routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [AuthService, SubjService],
+  providers: [AuthService, SubjService, TestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -24,8 +24,11 @@ public class JsonConverter {
     }
 
     public static <T> void makeResponse(T obj, HttpServletResponse resp) throws IOException {
-        resp.setContentType("application/json");
         PrintWriter writer = resp.getWriter();
-        writer.write(new ObjectMapper().writeValueAsString(obj));
+        try {
+            writer.write(new ObjectMapper().writeValueAsString(obj));
+        }finally {
+            writer.close();
+        }
     }
 }
