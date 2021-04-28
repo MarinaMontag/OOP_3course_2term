@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {Role} from './model/role';
 
 @Component({
   selector: 'app-root',
@@ -8,4 +9,8 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'front-end-angular';
   loggedIn = false;
+  role = Role.Student;
+  setLoggedIn(): void{
+    this.loggedIn = true;
+  }
 }

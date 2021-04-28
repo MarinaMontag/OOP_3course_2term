@@ -12,17 +12,14 @@ import {HttpClientModule} from '@angular/common/http';
 import {AuthService} from './auth.service';
 import {SubjService} from './subj.service';
 import {TestService} from './test.service';
-import { TestComponent } from './test-list/test/test.component';
-
-const testRoute = [
-  {path: 'test/:tid', component: TestComponent}
-];
+import { TestComponent } from './test/test.component';
+import { ResultComponent } from './result/result.component';
+import { CreateTestComponent } from './create-test/create-test.component';
 
 const routes = [
   {path: '', redirectTo: '/subject', pathMatch: 'full'},
   {path: 'subject', component: SubBoardComponent},
   {path: 'subject/:id', component: TestListComponent},
-  {path: 'subject/:id/:tid', component: TestComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent}
@@ -37,7 +34,9 @@ const routes = [
     RegisterComponent,
     TestListComponent,
     SubBoardComponent,
-    TestComponent
+    TestComponent,
+    ResultComponent,
+    CreateTestComponent
   ],
   imports: [
     BrowserModule,

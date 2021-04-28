@@ -2,7 +2,7 @@ package model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-@JsonPropertyOrder({"id", "name", "description"})
+@JsonPropertyOrder({"id", "subjectId", "name", "description"})
 public class Test {
     private int id;
     private int subjectId;
@@ -12,8 +12,9 @@ public class Test {
     public Test() {
     }
 
-    public Test(int id, String name, String description) {
+    public Test(int id, int subjectId, String name, String description) {
         this.id = id;
+        this.subjectId = subjectId;
         this.name = name;
         this.description = description;
     }

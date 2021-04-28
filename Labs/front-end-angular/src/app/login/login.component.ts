@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {User} from '../model/user';
 import {AuthService} from '../auth.service';
+import {Role} from '../model/role';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,14 @@ export class LoginComponent implements OnInit {
   login(): void {
     this.auth.loginUser(this.loginUserData).subscribe(
       res => {
-        console.log(res);
+        this.loginUserData = res;
+        if (res.role === 'STUDENT'){
+          this.loginUserData.role = Role.Student;
+        }
+        else {
+          this.loginUserData.role = Role.Tutor;
+        }
+        console.log(this.loginUserData);
       },
       error => {
         console.log(error);

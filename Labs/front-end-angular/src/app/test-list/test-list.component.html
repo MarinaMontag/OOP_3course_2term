@@ -1,5 +1,8 @@
-<div *ngIf="tests.length>0">
+<app-create-test *ngIf="createComponentVisible" [subjectId]="subjectId"></app-create-test>
+<div *ngIf="tests.length > 0 && visible && !createComponentVisible" >
   <h1>List of tests</h1>
+  <input *ngIf="isTutor()" type="submit" class="btn btn-secondary mb-3" value="Add test"
+  (click)="openCreateTestComponent()">
 <table class="table table-striped">
   <thead>
   <tr>
@@ -13,11 +16,14 @@
     <td>{{test.name}}</td>
     <td>{{test.description}}</td>
     <td>
-      <a routerLink="/subject/{{subjectId}}/{{test.id}}" class="btn btn-success">Pass</a>
+      <input type="button" value="Pass" class="btn btn-success" (click)="passTest(test.id, test.name)">
     </td>
   </tr>
   </tbody>
 </table>
 </div>
-<h5 *ngIf="tests.length==0">No tests</h5>
+<h5 *ngIf="tests.length==0&&visible">No tests</h5>
+<app-test *ngIf="!visible && !createComponentVisible" (back)="setTestListComponentVisible()" [id]="selectedTestId"
+[testName]="selectedTestName"></app-test>
+
 

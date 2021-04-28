@@ -1,12 +1,9 @@
 package controller.servlets;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import exception.ServerException;
-import model.Subject;
 import model.SubjectList;
 import service.SubjectServiceImpl;
 import util.JsonConverter;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;

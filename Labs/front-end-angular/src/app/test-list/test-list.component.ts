@@ -1,8 +1,8 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {TestService} from '../test.service';
-import {Test} from '../test';
-import {Location} from '@angular/common';
+import {Test} from '../model/test';
+import {Role} from '../model/role';
 
 @Component({
   selector: 'app-test-list',
@@ -11,11 +11,15 @@ import {Location} from '@angular/common';
 })
 export class TestListComponent implements OnInit{
   tests: Test[] = [];
+  selectedTestId: number;
+  selectedTestName: string;
   subjectId: number;
+  visible = true;
+  role = Role.Tutor;
+  createComponentVisible = false;
   constructor(
     private route: ActivatedRoute,
-    private testService: TestService,
-    private location: Location
+    private testService: TestService
   ) {
     route.params.subscribe(params => { this.subjectId = params.id; });
   }
@@ -30,7 +34,18 @@ ngOnInit(): void {
       );
   }
 
-  passTest(id: number): void{
-    this.location.back();
+  passTest(id: number, name: string): void{
+    this.selectedTestId = id;
+    this.selectedTestName = name;
+    this.visible = false;
+  }
+  setTestListComponentVisible(): void{
+    this.visible = true;
+  }
+  isTutor(): boolean{
+    return this.role === Role.Tutor;
+  }
+  openCreateTestComponent(): void{
+    this.createComponentVisible = true;
   }
 }
