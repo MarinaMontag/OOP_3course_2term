@@ -16,6 +16,11 @@ public class Question {
         answerList=new ArrayList<>();
     }
 
+    public Question(String text, List<Answer> answerList) {
+        this.text = text;
+        this.answerList = answerList;
+    }
+
     public Question(int id, int testId, String text) {
         this.id = id;
         this.testId = testId;

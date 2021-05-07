@@ -12,6 +12,11 @@ public class Answer {
     public Answer() {
     }
 
+    public Answer(String text, boolean correctness) {
+        this.text = text;
+        this.correctness = correctness;
+    }
+
     public Answer(int id, int questionId, String text, boolean correctness) {
         this.id = id;
         this.questionId = questionId;
@@ -50,6 +55,7 @@ public class Answer {
     public void setCorrectness(boolean correctness) {
         this.correctness = correctness;
     }
+
 
     @Override
     public String toString() {

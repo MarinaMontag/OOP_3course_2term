@@ -1,6 +1,7 @@
 export class Test{
-  id: number;
-  subjectId: number;
-  name: string;
-  description: string;
+  constructor(public id: number,
+              public subjectId: number,
+              public name: string,
+              public description: string) {
+  }
 }

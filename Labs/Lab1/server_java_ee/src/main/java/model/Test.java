@@ -12,11 +12,25 @@ public class Test {
     public Test() {
     }
 
+    public Test(int subjectId, String name, String description) {
+        this.subjectId = subjectId;
+        this.name = name;
+        this.description = description;
+    }
+
     public Test(int id, int subjectId, String name, String description) {
         this.id = id;
         this.subjectId = subjectId;
         this.name = name;
         this.description = description;
+    }
+
+    public int getSubjectId() {
+        return subjectId;
+    }
+
+    public void setSubjectId(int subjectId) {
+        this.subjectId = subjectId;
     }
 
     public int getId() {
@@ -41,5 +55,15 @@ public class Test {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Test{" +
+                "id=" + id +
+                ", subjectId=" + subjectId +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }

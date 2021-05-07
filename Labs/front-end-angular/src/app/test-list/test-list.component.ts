@@ -25,6 +25,7 @@ export class TestListComponent implements OnInit{
   }
 ngOnInit(): void {
     this.getTests();
+    console.log(this.subjectId);
 }
   getTests(): void {
     this.testService.getTests(this.subjectId)
@@ -41,6 +42,7 @@ ngOnInit(): void {
   }
   setTestListComponentVisible(): void{
     this.visible = true;
+    this.createComponentVisible = false;
   }
   isTutor(): boolean{
     return this.role === Role.Tutor;

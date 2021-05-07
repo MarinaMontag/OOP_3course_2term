@@ -1,8 +1,8 @@
 import {Question} from './question';
+import {Test} from './test';
 
 export class CreatedTest{
-  subjectId: number;
-  name: string;
-  description: string;
-  questions: Question[];
+  constructor(public testInfo: Test,
+              public questions: Question[]) {
+  }
 }

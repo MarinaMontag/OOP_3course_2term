@@ -1,8 +1,9 @@
 import {Answer} from './answer';
 
 export class Question{
-  id: number;
-  testId: number;
-  text: string;
-  answerList: Answer[];
+  constructor(public id: number,
+              public testId: number,
+              public text: string,
+              public answerList: Answer[]) {
+  }
 }

@@ -1,4 +1,11 @@
-<app-create-test *ngIf="createComponentVisible" [subjectId]="subjectId"></app-create-test>
+<div *ngIf="tests.length==0 && visible && !createComponentVisible">
+<h5 >No tests</h5>
+<input *ngIf="isTutor()" type="submit" class="btn btn-secondary mb-3" value="Add test"
+       (click)="openCreateTestComponent()">
+</div>
+
+<app-create-test *ngIf="createComponentVisible" [subjectId]="subjectId"
+(back) = setTestListComponentVisible()></app-create-test>
 <div *ngIf="tests.length > 0 && visible && !createComponentVisible" >
   <h1>List of tests</h1>
   <input *ngIf="isTutor()" type="submit" class="btn btn-secondary mb-3" value="Add test"
@@ -22,8 +29,8 @@
   </tbody>
 </table>
 </div>
-<h5 *ngIf="tests.length==0&&visible">No tests</h5>
-<app-test *ngIf="!visible && !createComponentVisible" (back)="setTestListComponentVisible()" [id]="selectedTestId"
-[testName]="selectedTestName"></app-test>
+
+<app-test *ngIf="!visible && !createComponentVisible" (back)="setTestListComponentVisible()"
+[testName]="selectedTestName" [testId]="selectedTestId"></app-test>
 
 

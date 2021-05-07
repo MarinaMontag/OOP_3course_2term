@@ -2,6 +2,7 @@ package service;
 
 import dao.TestDAO;
 import exception.ServerException;
+import model.CreatedTest;
 import model.QuestionList;
 import model.TestList;
 
@@ -14,4 +15,10 @@ public class TestServiceImpl implements TestService {
     public QuestionList getQuestionAndAnswersByTestId(int id)throws ServerException{
         return TestDAO.selectQuestionsAndAnswersByTestId(id);
     }
+
+    @Override
+    public void createTest(CreatedTest test) throws ServerException {
+       TestDAO.insertTest(test);
+    }
 }
+

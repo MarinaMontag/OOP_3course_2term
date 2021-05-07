@@ -1,7 +1,8 @@
 export class Answer{
-  id: number;
-  questionId: number;
-  text: string;
-  correctness: boolean;
-  selected: boolean;
+  constructor(public id: number,
+              public questionId: number,
+              public text: string,
+              public correctness: boolean) {
+  }
+  selected = false;
 }
