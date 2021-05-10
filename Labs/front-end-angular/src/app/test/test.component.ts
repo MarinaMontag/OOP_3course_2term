@@ -27,7 +27,6 @@ export class TestComponent implements OnInit{
     this.service.getTest(this.testId).subscribe(
       res => {
         this.questions = res.questions;
-        console.log(res.questions);
       },
       error => console.log(error)
     );

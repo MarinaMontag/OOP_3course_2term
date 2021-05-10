@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Role} from '../model/role';
 import {User} from '../model/user';
 import {AuthService} from '../auth.service';
+import {Router} from '@angular/router';
+import jwtDecode from 'jwt-decode';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +12,8 @@ import {AuthService} from '../auth.service';
 })
 export class RegisterComponent implements OnInit {
   registerUserData = new User('', '', '', '', null);
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService,
+              private router: Router) { }
   ngOnInit(): void {
   }
 
@@ -23,16 +26,19 @@ export class RegisterComponent implements OnInit {
   register(role: string): void{
     this.setRole(role);
     this.authService.registerUser(this.registerUserData).subscribe(
-     res => console.log(res),
+     res => {
+       localStorage.setItem('token', res.token);
+       this.router.navigate(['/subject']);
+     },
      error => console.log(error)
    );
   }
 
   setRole(role: string): void{
-    if (role === 'student') {
+    if (role === 'STUDENT') {
       this.setStudent();
     }
-    else {
+    else if (role === 'TUTOR'){
       this.setTutor();
     }
   }

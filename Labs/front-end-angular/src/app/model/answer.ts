@@ -4,5 +4,5 @@ export class Answer{
               public text: string,
               public correctness: boolean) {
   }
-  selected = false;
+  selected: boolean;
 }

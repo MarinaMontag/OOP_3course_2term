@@ -1,10 +1,12 @@
 package controller.servlets;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import controller.servlets.util.Token;
 import exception.ServerException;
 import model.User;
 import service.UserService;
 import service.UserServiceImpl;
+import util.JWTConverter;
 import util.JsonConverter;
 
 import javax.servlet.ServletException;
@@ -13,6 +15,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.concurrent.TimeUnit;
+
+import static controller.servlets.util.SendResponse.sendResponse;
 
 @WebServlet(urlPatterns = {"/register"})
 public class RegisterServlet extends HttpServlet {
@@ -32,7 +38,10 @@ public class RegisterServlet extends HttpServlet {
             if(user == null){
                 resp.sendError(400, "Bad request");
             }else{
-                JsonConverter.makeResponse(user, resp);
+                String jwt = JWTConverter.createJWT(user.getEmail(), user.getRole().toString(),
+                        TimeUnit.MINUTES.toMillis(30));
+                Token token = new Token(jwt, user.getRole());
+                JsonConverter.makeResponse(token, resp);
             }
         } catch (ServerException | ClassNotFoundException e) {
             resp.sendError(400, "Bad request");

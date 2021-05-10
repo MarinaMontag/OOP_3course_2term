@@ -58,10 +58,8 @@ export class CreateTestComponent implements OnInit {
     for (const answer of answersArray){
       question.answerList.push(new Answer(null, null, answer, null));
     }
-    console.log(question.answerList);
     this.setAnswersCorrectness(question);
     this.test.questions.push(question);
-    console.log(question.answerList);
     this.questionForm = this.createQuestionNewFormGroup();
   }
 
@@ -84,7 +82,6 @@ export class CreateTestComponent implements OnInit {
   }
   save(): void{
     this.addQuestion();
-    console.log(this.test);
     this.http.sendTest(this.test).subscribe(
       resp => console.log(resp),
       error => console.log(error)
@@ -95,7 +92,6 @@ export class CreateTestComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.subjectId);
     this.test = new CreatedTest(new Test(null, this.subjectId, '', ''),
       []);
   }

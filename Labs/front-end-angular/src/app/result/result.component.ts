@@ -13,7 +13,6 @@ export class ResultComponent implements OnInit {
   @Output() backToTests = new EventEmitter<boolean>();
   constructor() { }
   ngOnInit(): void {
-    console.log(this.result);
   }
   repassTest(): void{
     this.restart.emit(true);

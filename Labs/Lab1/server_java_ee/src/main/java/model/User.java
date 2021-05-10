@@ -5,10 +5,10 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 @JsonPropertyOrder({"firstName", "lastName", "email", "password", "role"})
 public class User {
     private String firstName;
-    public String lastName;
-    public String email;
-    public String password;
-    public Role role;
+    private String lastName;
+    private String email;
+    private String password;
+    private Role role;
 
     public User() {
     }

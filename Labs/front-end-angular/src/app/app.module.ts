@@ -15,9 +15,10 @@ import {TestService} from './test.service';
 import { TestComponent } from './test/test.component';
 import { ResultComponent } from './result/result.component';
 import { CreateTestComponent } from './create-test/create-test.component';
+import {AuthGuard} from './auth.guard';
 
 const routes = [
-  {path: '', redirectTo: '/subject', pathMatch: 'full'},
+  {path: '', redirectTo: 'subject', pathMatch: 'full'},
   {path: 'subject', component: SubBoardComponent},
   {path: 'subject/:id', component: TestListComponent},
   {path: 'login', component: LoginComponent},
@@ -46,7 +47,7 @@ const routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [AuthService, SubjService, TestService],
+  providers: [AuthService, SubjService, TestService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
