@@ -1,10 +1,11 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Question} from '../model/question';
 import {CreatedTest} from '../model/created-test';
 import {Answer} from '../model/answer';
 import {Test} from '../model/test';
 import {TestService} from '../test.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
   selector: 'app-create-test',
@@ -12,21 +13,26 @@ import {TestService} from '../test.service';
   styleUrls: ['./create-test.component.css']
 })
 export class CreateTestComponent implements OnInit {
-  @Input() subjectId: number;
-  @Output() back = new EventEmitter<boolean>();
+  subjectId: number;
   questionForm: FormGroup;
   testInfoForm: FormGroup;
   test: CreatedTest;
   enterTestInfo = true;
   enterQuestions = false;
-  constructor(private fb: FormBuilder, private http: TestService){
+  constructor(private fb: FormBuilder,
+              private http: TestService,
+              private route: ActivatedRoute,
+              private router: Router){
     this.questionForm =  this.createQuestionNewFormGroup();
     this.testInfoForm = this.createTestInfoFormGroup();
+    this.route.params.subscribe(params => {
+      this.subjectId = params.id;
+    });
   }
   cancel(): void{
     this.test = new CreatedTest(new Test(null, this.subjectId, '', ''),
       []);
-    this.back.emit(true);
+    this.router.navigate(['/subject/' + this.subjectId]);
   }
   createQuestionNewFormGroup(): FormGroup{
     return this.fb.group({
@@ -88,7 +94,7 @@ export class CreateTestComponent implements OnInit {
     );
     this.test = new CreatedTest(new Test(null, this.subjectId, '', ''),
       []);
-    this.back.emit(true);
+    this.router.navigate(['/subject/' + this.subjectId]);
   }
 
   ngOnInit(): void {

@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
-import {RouterModule} from '@angular/router';
+import {RouterModule, Routes} from '@angular/router';
 import { RegisterComponent } from './register/register.component';
 import { TestListComponent } from './test-list/test-list.component';
 import { SubBoardComponent } from './sub-board/sub-board.component';
@@ -18,14 +18,20 @@ import { CreateTestComponent } from './create-test/create-test.component';
 import {AuthGuard} from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
 
+const resultRoute: Routes = [
+  { path: ':id', component: TestListComponent}
+];
 
-const routes = [
+
+const routes: Routes = [
   {path: '', redirectTo: 'subject', pathMatch: 'full'},
   {path: 'subject', component: SubBoardComponent},
   {path: 'subject/:id', component: TestListComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
-  {path: 'profile', component: ProfileComponent}
+  {path: 'profile', component: ProfileComponent},
+  {path: 'create/:id', component: CreateTestComponent, canActivate: [AuthGuard]},
+  {path: 'test/:id', component: TestComponent, canActivate: [AuthGuard]}
 ];
 
 

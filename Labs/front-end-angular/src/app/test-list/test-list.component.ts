@@ -14,12 +14,8 @@ import {AuthService} from '../auth.service';
 })
 export class TestListComponent implements OnInit{
   tests: Test[] = [];
-  selectedTestId: number;
-  selectedTestName: string;
   subjectId: number;
-  visible = true;
   role: Role;
-  createComponentVisible = false;
   constructor(
     private route: ActivatedRoute,
     private testService: TestService,
@@ -56,14 +52,8 @@ ngOnInit(): void {
       );
   }
 
-  passTest(id: number, name: string): void{
-    this.selectedTestId = id;
-    this.selectedTestName = name;
-    this.visible = !this.guard.canActivate();
-  }
-  setTestListComponentVisible(): void{
-    this.visible = true;
-    this.createComponentVisible = false;
+  passTest(id: number): void{
+    this.router.navigate(['/test/' + id]);
   }
   isTutor(): boolean{
     if (this.role != null) {
@@ -75,6 +65,6 @@ ngOnInit(): void {
     }
   }
   openCreateTestComponent(): void{
-    this.createComponentVisible = this.guard.canActivate();
+    this.router.navigate(['/create/' + this.subjectId]);
   }
 }

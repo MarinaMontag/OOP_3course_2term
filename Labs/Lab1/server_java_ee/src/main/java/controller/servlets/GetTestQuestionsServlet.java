@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import exception.ServerException;
 import model.CreatedTest;
 import model.QuestionList;
+import model.Test;
 import model.User;
 import service.TestService;
 import service.TestServiceImpl;
@@ -29,11 +30,14 @@ public class GetTestQuestionsServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int testId = Integer.parseInt(req.getParameter("id"));
         try {
-                QuestionList list = testService.getQuestionAndAnswersByTestId(testId);
-                if (list.getQuestions() == null || list.getQuestions().size() == 0)
+                QuestionList questionList = testService.getQuestionAndAnswersByTestId(testId);
+                Test testInfo = testService.getTestById(testId);
+                CreatedTest test = new CreatedTest(testInfo, questionList.getQuestions());
+                if (testInfo==null||questionList.getQuestions() == null ||
+                        questionList.getQuestions().size() == 0)
                     resp.sendError(404, "Resource not found");
                 else
-                    JsonConverter.makeResponse(list, resp);
+                    JsonConverter.makeResponse(test, resp);
         } catch (ServerException e) {
             resp.sendError(404, e.getMessage());
         }

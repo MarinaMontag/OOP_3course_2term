@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Question} from '../model/question';
+import {Component, OnInit} from '@angular/core';
 import {TestService} from '../test.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {CreatedTest} from '../model/created-test';
 
 
 @Component({
@@ -9,38 +10,41 @@ import {TestService} from '../test.service';
   styleUrls: ['./test.component.css']
 })
 export class TestComponent implements OnInit{
-  @Input() testId: number;
-  @Input() testName: string;
-  // tslint:disable-next-line:no-output-on-prefix
-  @Output() back = new EventEmitter<boolean>();
-  questions: Question[] = [];
-  answers: number[];
+  test: CreatedTest;
   result: number;
   visible = true;
   goBack(): void{
-    this.back.emit(true);
+    this.router.navigate(['/subject/' + this.test.testInfo.subjectId]);
   }
   constructor(
-    private service: TestService
-  ) { }
+    private service: TestService,
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+  }
   ngOnInit(): void {
-    this.service.getTest(this.testId).subscribe(
-      res => {
-        this.questions = res.questions;
-      },
-      error => console.log(error)
+    console.log(this.test);
+    this.route.params.subscribe(
+      params => {
+        this.service.getTest(params.id).subscribe(
+          res => {
+            this.test = new CreatedTest(res.testInfo, res.questions);
+          },
+          error => console.log(error)
+        );
+      }
     );
   }
   onSelect(questionNum: number, answerNum: number): void{
-    const id = this.questions[questionNum].answerList[answerNum].id;
-    this.questions[questionNum].answerList.forEach((answer) => {
+    const id = this.test.questions[questionNum].answerList[answerNum].id;
+    this.test.questions[questionNum].answerList.forEach((answer) => {
         answer.selected = answer.id === id;
       }
     );
   }
   setResult(): void{
     this.result = 0;
-    this.questions.forEach((question) =>
+    this.test.questions.forEach((question) =>
     {
       question.answerList.forEach((answer) =>
       {

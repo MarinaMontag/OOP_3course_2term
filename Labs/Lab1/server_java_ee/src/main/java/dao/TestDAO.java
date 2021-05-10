@@ -22,6 +22,8 @@ public class TestDAO {
             "SELECT * FROM ques WHERE t_id = ?";
     private static final String selectAnswersByQuestionIdQuery =
             "SELECT * FROM answ WHERE q_id = ?";
+    private static final String selectTestByIdQuery =
+            "SELECT * FROM tests WHERE t_id = ?";
     private static final String insertTestQuery =
             "INSERT INTO tests VALUES (DEFAULT, ?, ?, ?)";
     private static final String insertQuestionQuery =
@@ -173,6 +175,26 @@ public class TestDAO {
             throw new ServerException("can not select answers");
         }
         return answers;
+    }
+
+    public static Test selectTestById(int id) throws ServerException {
+        Test test = null;
+        try(Connection conn = JdbcConnection.getConnection()){
+            PreparedStatement preparedStatement = conn.prepareStatement(selectTestByIdQuery);
+            preparedStatement.setInt(1,id);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                test = new Test(resultSet.getInt(1),
+                        resultSet.getInt(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4));
+            }
+            if(test == null)
+                throw new ServerException("can not select test");
+        } catch (SQLException | ClassNotFoundException | ServerException e) {
+            throw new ServerException("can not select answers");
+        }
+        return test;
     }
     private static boolean getCorrectnessOfAnswer(int corr){
         return corr==1;
