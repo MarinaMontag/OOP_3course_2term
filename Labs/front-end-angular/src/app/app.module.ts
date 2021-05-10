@@ -8,7 +8,7 @@ import { RegisterComponent } from './register/register.component';
 import { TestListComponent } from './test-list/test-list.component';
 import { SubBoardComponent } from './sub-board/sub-board.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {AuthService} from './auth.service';
 import {SubjService} from './subj.service';
 import {TestService} from './test.service';
@@ -16,6 +16,8 @@ import { TestComponent } from './test/test.component';
 import { ResultComponent } from './result/result.component';
 import { CreateTestComponent } from './create-test/create-test.component';
 import {AuthGuard} from './auth.guard';
+import { TokenInterceptorService } from './token-interceptor.service';
+
 
 const routes = [
   {path: '', redirectTo: 'subject', pathMatch: 'full'},
@@ -47,7 +49,12 @@ const routes = [
     FormsModule,
     HttpClientModule
   ],
-  providers: [AuthService, SubjService, TestService, AuthGuard],
+  providers: [AuthService, SubjService, TestService, AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

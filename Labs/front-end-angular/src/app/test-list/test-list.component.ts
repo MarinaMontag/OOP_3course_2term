@@ -5,6 +5,7 @@ import {Test} from '../model/test';
 import {Role} from '../model/role';
 import jwtDecode from 'jwt-decode';
 import {AuthGuard} from '../auth.guard';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-test-list',
@@ -23,7 +24,8 @@ export class TestListComponent implements OnInit{
     private route: ActivatedRoute,
     private testService: TestService,
     private router: Router,
-    private guard: AuthGuard
+    private guard: AuthGuard,
+    private authService: AuthService
   ) {
     route.params.subscribe(params => {
       this.subjectId = params.id;
@@ -33,7 +35,7 @@ ngOnInit(): void {
     this.getTests();
     if (this.role === undefined) {
     // @ts-ignore
-    const decodeRole = jwtDecode(localStorage.getItem('token')).sub;
+    const decodeRole = jwtDecode(this.authService.getToken()).sub;
     if (decodeRole === 'STUDENT') {
       this.role = Role.Student;
     }
