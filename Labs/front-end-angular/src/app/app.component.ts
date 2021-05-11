@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import jwtDecode from 'jwt-decode';
+import {AuthService} from './auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,18 +9,7 @@ import jwtDecode from 'jwt-decode';
 
 export class AppComponent implements OnInit{
   title = 'front-end-angular';
-  loggedIn = false;
-  setLoggedIn(): void{
-    this.loggedIn = true;
-  }
-  setLoggedOut(): void{
-    this.loggedIn = false;
-  }
-  constructor() {
-    if (localStorage.getItem('token') != null){
-      console.log(jwtDecode(localStorage.getItem('token')));
-      this.setLoggedIn();
-    }
+  constructor(public authService: AuthService) {
   }
   ngOnInit(): void {
     }

@@ -15,6 +15,9 @@ public class UserDAO {
             "INSERT INTO users VALUES (default, ?, ?, ?, ?, ?)";
     private static final String selectUserQuery =
             "SELECT * FROM users WHERE uemail = ? AND upassword = ?";
+    private static final String selectUserByEmailAndRoleQuery =
+            "SELECT * FROM users WHERE uemail = ? AND urole = ?";
+
 
     public static User addUser(User user) throws ServerException, ClassNotFoundException {
         if(user==null)
@@ -53,6 +56,25 @@ public class UserDAO {
                         resultSet.getInt(6));
             }
         }catch (SQLException e){
+            throw new ServerException("can not select user");
+        }
+        return user;
+    }
+    public static User selectUserByEmailAndRole(String email, int role) throws ServerException {
+        User user = null;
+        try(Connection conn = JdbcConnection.getConnection()){
+            PreparedStatement preparedStatement = conn.prepareStatement(selectUserByEmailAndRoleQuery);
+            preparedStatement.setString(1,email);
+            preparedStatement.setInt(2,role);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if (resultSet.next()){
+                user= new User(resultSet.getString(2),
+                        resultSet.getString(3),
+                        resultSet.getString(4),
+                        resultSet.getString(5),
+                        resultSet.getInt(6));
+            }
+        }catch (SQLException | ClassNotFoundException e){
             throw new ServerException("can not select user");
         }
         return user;

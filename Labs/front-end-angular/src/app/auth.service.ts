@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {User} from './model/user';
 import {Observable} from 'rxjs';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +10,8 @@ import {Observable} from 'rxjs';
 export class AuthService {
   private registerUrl = 'http://localhost:8081/register';
   private loginUrl = 'http://localhost:8081/login';
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+              private router: Router) {
   }
   registerUser(user: User): Observable<any>{
     return this.http.post(this.registerUrl, JSON.stringify(user));
@@ -22,5 +24,9 @@ export class AuthService {
   }
   getToken(): string{
     return localStorage.getItem('token');
+  }
+  logout(): void{
+    localStorage.removeItem('token');
+    this.router.navigate(['/subject']);
   }
 }

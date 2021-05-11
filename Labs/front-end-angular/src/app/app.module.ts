@@ -18,10 +18,6 @@ import { CreateTestComponent } from './create-test/create-test.component';
 import {AuthGuard} from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
 
-const resultRoute: Routes = [
-  { path: ':id', component: TestListComponent}
-];
-
 
 const routes: Routes = [
   {path: '', redirectTo: 'subject', pathMatch: 'full'},
@@ -31,7 +27,7 @@ const routes: Routes = [
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'create/:id', component: CreateTestComponent, canActivate: [AuthGuard]},
-  {path: 'test/:id', component: TestComponent, canActivate: [AuthGuard]}
+  {path: 'test/:id', component: TestComponent}
 ];
 
 

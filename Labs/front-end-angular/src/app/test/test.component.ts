@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TestService} from '../test.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CreatedTest} from '../model/created-test';
+import {HttpErrorResponse} from '@angular/common/http';
 
 
 @Component({
@@ -30,7 +31,13 @@ export class TestComponent implements OnInit{
           res => {
             this.test = new CreatedTest(res.testInfo, res.questions);
           },
-          error => console.log(error)
+          error => {
+            if (error instanceof HttpErrorResponse){
+              if (error.status === 401){
+                this.router.navigate(['/login']);
+              }
+            }
+          }
         );
       }
     );

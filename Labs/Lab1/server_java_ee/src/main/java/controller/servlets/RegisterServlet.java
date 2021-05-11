@@ -15,10 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.concurrent.TimeUnit;
-
-import static controller.servlets.util.SendResponse.sendResponse;
 
 @WebServlet(urlPatterns = {"/register"})
 public class RegisterServlet extends HttpServlet {
@@ -40,7 +37,7 @@ public class RegisterServlet extends HttpServlet {
             }else{
                 String jwt = JWTConverter.createJWT(user.getEmail(), user.getRole().toString(),
                         TimeUnit.MINUTES.toMillis(30));
-                Token token = new Token(jwt, user.getRole());
+                Token token = new Token(jwt);
                 JsonConverter.makeResponse(token, resp);
             }
         } catch (ServerException | ClassNotFoundException e) {

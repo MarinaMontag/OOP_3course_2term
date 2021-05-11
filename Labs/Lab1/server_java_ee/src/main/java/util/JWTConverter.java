@@ -1,5 +1,6 @@
 package util;
 
+import exception.ServerException;
 import io.jsonwebtoken.*;
 
 import javax.crypto.spec.SecretKeySpec;
@@ -26,9 +27,14 @@ public class JWTConverter {
         }
         return builder.compact();
     }
-    public static Claims decodeJWT(String jwt){
-        return Jwts.parser()
-                .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
-                .parseClaimsJws(jwt).getBody();
+    public static Claims decodeJWT(String jwt) throws ServerException {
+        try {
+            Claims claims = Jwts.parser()
+                    .setSigningKey(DatatypeConverter.parseBase64Binary(SECRET_KEY))
+                    .parseClaimsJws(jwt).getBody();
+            return claims;
+        }catch (ExpiredJwtException | MalformedJwtException e){
+            throw new ServerException("Unauthorized request");
+        }
     }
 }

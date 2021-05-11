@@ -31,18 +31,4 @@ export class LoginComponent implements OnInit {
       }
     );
   }
-  setStudent(): void{
-    this.loginUserData.role = Role.Student;
-  }
-  setTutor(): void{
-    this.loginUserData.role = Role.Tutor;
-  }
-  setRole(role: string): void{
-    if (role === 'STUDENT') {
-      this.setStudent();
-    }
-    else if (role === 'TUTOR'){
-      this.setTutor();
-    }
-  }
 }

@@ -14,4 +14,9 @@ public class UserServiceImpl implements UserService{
     public User getUser(String email, String password) throws ServerException, ClassNotFoundException {
         return UserDAO.selectUser(email, password);
     }
+
+    @Override
+    public User getUserByEmailAndRole(String email, int role) throws ServerException{
+        return UserDAO.selectUserByEmailAndRole(email, role);
+    }
 }
