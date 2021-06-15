@@ -1,10 +1,16 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Data
+@AllArgsConstructor
+@ToString
 @JsonPropertyOrder({"id", "testId", "text", "answerList"})
 public class Question {
     private int id;
@@ -12,68 +18,10 @@ public class Question {
     private String text;
     private List<Answer> answerList;
 
-    public Question() {
-        answerList=new ArrayList<>();
-    }
-
-    public Question(String text, List<Answer> answerList) {
-        this.text = text;
-        this.answerList = answerList;
-    }
-
     public Question(int id, int testId, String text) {
         this.id = id;
         this.testId = testId;
         this.text = text;
         answerList=new ArrayList<>();
-    }
-
-    public Question(int id, int testId, String text, List<Answer> answerList) {
-        this.id = id;
-        this.testId = testId;
-        this.text = text;
-        this.answerList = answerList;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public int getTestId() {
-        return testId;
-    }
-
-    public void setTestId(int testId) {
-        this.testId = testId;
-    }
-
-    public String getText() {
-        return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
-    }
-
-    public List<Answer> getAnswerList() {
-        return answerList;
-    }
-
-    public void setAnswerList(List<Answer> answerList) {
-        this.answerList = answerList;
-    }
-
-    @Override
-    public String toString() {
-        return "Question{" +
-                "id=" + id +
-                ", testId=" + testId +
-                ", text='" + text + '\'' +
-                ", answerList=" + answerList +
-                '}';
     }
 }

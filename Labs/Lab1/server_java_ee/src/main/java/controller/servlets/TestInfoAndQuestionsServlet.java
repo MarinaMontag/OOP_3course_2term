@@ -35,9 +35,9 @@ public class TestInfoAndQuestionsServlet extends HttpServlet {
                 int testId = Integer.parseInt(req.getParameter("id"));
                 QuestionList questionList = testService.getQuestionAndAnswersByTestId(testId);
                 Test testInfo = testService.getTestById(testId);
-                CreatedTest test = new CreatedTest(testInfo, questionList.getQuestions());
-                if (testInfo==null||questionList.getQuestions() == null ||
-                        questionList.getQuestions().size() == 0)
+                CreatedTest test = new CreatedTest(testInfo, questionList.getQuestionList());
+                if (testInfo==null||questionList.getQuestionList() == null ||
+                        questionList.getQuestionList().size() == 0)
                     resp.sendError(404, "Resource not found");
                 else
                     JsonConverter.makeResponse(test, resp);

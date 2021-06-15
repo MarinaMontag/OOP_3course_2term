@@ -1,26 +1,15 @@
 package model;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 @JsonPropertyOrder({"testList"})
 public class TestList {
     List<Test>testList;
-
-    public TestList() {
-        testList=new ArrayList<>();
-    }
-
-    public TestList(List<Test> testList) {
-        this.testList = testList;
-    }
-
-    public List<Test> getTestList() {
-        return testList;
-    }
-
-    public void setTestList(List<Test> testList) {
-        this.testList = testList;
-    }
 }
