@@ -1,6 +1,6 @@
 package ua.knu.montag.backend.models;
 
 public enum ERole {
-    STUDENT,
-    TUTOR
+    ROLE_STUDENT,
+    ROLE_TUTOR
 }
