@@ -13,6 +13,9 @@ export class UserService {
   getSubjects(): Observable<any>{
     return this.http.get(GET_SUBJECTS_URL, {responseType: 'text'});
   }
+  getSubjectTests(subjectId: number): Observable<any>{
+    return this.http.get(GET_SUBJECTS_URL + '/' + subjectId, {responseType: 'text'});
+  }
   // getStudentContent(): Observable<any>{
   //   return this.http.get(API_URL + 'student', {responseType: 'text'});
   // }

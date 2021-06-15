@@ -6,12 +6,12 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
 import { ProfileComponent } from './profile/profile.component';
-import { BoardStudentComponent } from './board-student/board-student.component';
-import { BoardTutorComponent } from './board-tutor/board-tutor.component';
 import {AppRoutingModule} from './app-routing.module';
 import {FormsModule} from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { TestListComponent } from './test-list/test-list.component';
+import { PassTestComponent } from './pass-test/pass-test.component';
 
 @NgModule({
   declarations: [
@@ -20,8 +20,8 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
     RegisterComponent,
     HomeComponent,
     ProfileComponent,
-    BoardStudentComponent,
-    BoardTutorComponent
+    TestListComponent,
+    PassTestComponent
   ],
   imports: [
     BrowserModule,

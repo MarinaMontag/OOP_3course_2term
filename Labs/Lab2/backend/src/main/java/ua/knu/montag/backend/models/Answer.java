@@ -9,18 +9,19 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "subjects",
-        uniqueConstraints = {
-                @UniqueConstraint(columnNames = "name")
-        })
+@Table(name = "answers")
 @NoArgsConstructor
 @Data
 @ToString
-public class Subject {
+public class Answer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
+    @ManyToOne
+    @JoinColumn(name = "question_id", nullable = false)
+    private Question question;
     @NotBlank
-    @Size(max = 30)
-    private String name;
+    @Size(max = 150)
+    private String text;
+    private Boolean correctness;
 }
