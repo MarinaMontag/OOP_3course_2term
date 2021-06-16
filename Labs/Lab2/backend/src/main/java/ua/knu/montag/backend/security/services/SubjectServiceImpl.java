@@ -17,4 +17,11 @@ public class SubjectServiceImpl implements SubjectService {
     public List<Subject> getAllSubjects() {
         return repository.findAll();
     }
+
+    @Override
+    @Transactional
+    public Subject getSubjectById(int id) {
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("No subject found by id: "+id));
+    }
 }

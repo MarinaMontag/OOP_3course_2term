@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 import ua.knu.montag.backend.models.Subject;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface SubjectRepository extends JpaRepository<Subject, Integer> {
@@ -13,4 +14,6 @@ public interface SubjectRepository extends JpaRepository<Subject, Integer> {
             value = "SELECT * FROM subjects",
             nativeQuery = true)
     List<Subject>findAll();
+    @Override
+    Optional<Subject> findById(Integer integer);
 }

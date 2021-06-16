@@ -8,6 +8,7 @@ import {ProfileComponent} from './profile/profile.component';
 import {TestListComponent} from './test-list/test-list.component';
 import {PassTestComponent} from './pass-test/pass-test.component';
 import {AuthGuard} from './_guards/auth.guard';
+import {CreateTestComponent} from './create-test/create-test.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'test/:id', component: PassTestComponent, canActivate: [AuthGuard] },
+  { path: 'create/:id', component: CreateTestComponent, canActivate: [AuthGuard]},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

@@ -1,18 +1,17 @@
-package ua.knu.montag.backend.payload.response;
+package ua.knu.montag.backend.payload;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 import java.util.List;
 
 @AllArgsConstructor
 @Data
-@JsonPropertyOrder({"id", "name", "description", "questions"})
-public class FullTestResponse {
+@JsonPropertyOrder({"id", "subjectId", "name", "description", "questions"})
+public class FullTest {
     private Long id;
+    private Integer subjectId;
     private String name;
     private String description;
     private List<TestQuestion> questions;

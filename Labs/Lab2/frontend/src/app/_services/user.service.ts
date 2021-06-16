@@ -1,9 +1,13 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs';
+import {FullTest} from '../_model/full-test';
 
 const GET_SUBJECTS_URL = 'http://localhost:8081/api/subjects';
 const GET_TEST_URL = 'http://localhost:8081/api/test';
+const httpOptions = {
+  headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+};
 
 @Injectable({
   providedIn: 'root'
@@ -19,5 +23,8 @@ export class UserService {
   }
   getTest(testId: bigint): Observable<any>{
     return this.http.get(GET_TEST_URL + '/' + testId, {responseType: 'text'});
+  }
+  sendTest(test: FullTest): Observable<any>{
+    return this.http.post(GET_TEST_URL, test, httpOptions);
   }
 }

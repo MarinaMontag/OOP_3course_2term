@@ -23,4 +23,9 @@ public class Question {
     @NotBlank
     @Size(max = 150)
     private String text;
+
+    public Question(Test test, @NotBlank @Size(max = 150) String text) {
+        this.test = test;
+        this.text = text;
+    }
 }

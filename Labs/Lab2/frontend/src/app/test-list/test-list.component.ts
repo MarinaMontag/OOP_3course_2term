@@ -43,4 +43,7 @@ export class TestListComponent implements OnInit {
   passTest(id: bigint): void{
     this.router.navigate(['/test/' + id]);
   }
+  openCreateTestComponent(): void{
+    this.router.navigate(['/create/' + this.subjectId]);
+  }
 }

@@ -1,11 +1,13 @@
 <div *ngIf="tests.length==0">
   <h5 >No tests</h5>
-  <input *ngIf="isTutor" type="submit" class="btn btn-secondary mb-3" value="Add test">
+  <input *ngIf="isTutor" type="submit" class="btn btn-secondary mb-3" value="Add test"
+         (click)="openCreateTestComponent()">
 </div>
 
 <div *ngIf="tests.length > 0" >
   <h1>List of tests</h1>
-  <input *ngIf="isTutor" type="submit" class="btn btn-secondary mb-3" value="Add test">
+  <input *ngIf="isTutor" type="submit" class="btn btn-secondary mb-3" value="Add test"
+         (click)="openCreateTestComponent()">
   <table class="table table-striped">
     <thead>
     <tr>

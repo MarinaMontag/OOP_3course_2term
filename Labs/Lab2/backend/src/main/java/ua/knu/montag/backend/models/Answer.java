@@ -24,4 +24,10 @@ public class Answer {
     @Size(max = 150)
     private String text;
     private Boolean correctness;
+
+    public Answer(Question question, @NotBlank @Size(max = 150) String text, Boolean correctness) {
+        this.question = question;
+        this.text = text;
+        this.correctness = correctness;
+    }
 }

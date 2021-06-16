@@ -1,10 +1,8 @@
-package ua.knu.montag.backend.payload.response;
+package ua.knu.montag.backend.payload;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @AllArgsConstructor
 @Data
